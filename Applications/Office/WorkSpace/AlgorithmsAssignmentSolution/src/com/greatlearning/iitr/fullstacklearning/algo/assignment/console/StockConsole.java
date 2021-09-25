@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 
+import com.greatlearning.iitr.fullstacklearning.algo.assignment.driver.StockChecker;
 import com.greatlearning.iitr.fullstacklearning.algo.assignment.driver.StockComparator;
 
 public class StockConsole {
@@ -25,12 +26,10 @@ public class StockConsole {
 				Boolean priceChangedFlag = new Boolean(myObj.nextLine());
 				stockPriceChangedList.add(priceChangedFlag);
 			}
-			// System.out.println(stockPriceChangedList);
-			// System.out.println(stockPriceList);
 			displayOperations();
 			while (optNo != 0) {
 				optNo = Integer.parseInt(myObj.nextLine());
-				performOperations(optNo,stockPriceList,stockPriceChangedList);
+				performOperations(optNo, stockPriceList, stockPriceChangedList, myObj);
 				displayOperations();
 			}
 
@@ -41,11 +40,12 @@ public class StockConsole {
 	}
 
 	/**
-	 * This method is used to display multiple 
-	 * operations options which user want to 
+	 * This method is used to display multiple operations options which user want to
 	 * perform
 	 */
 	static void displayOperations() {
+
+		System.out.println(" ");
 		System.out.println("================================");
 		System.out.println("Enter the operation that you want to perform");
 		System.out.println("1. Display the companies stock prices in ascending order");
@@ -55,36 +55,35 @@ public class StockConsole {
 		System.out.println("5. Search a specific stock price");
 		System.out.println("6. press 0 to exit");
 		System.out.println("================================");
+
 	}
 
 	/**
-	 * This method is used to capture user operation
-	 * and invoke the correct method
+	 * This method is used to capture user operation and invoke the correct method
+	 * 
 	 * @param optNo
 	 * @param stockPriceList
 	 * @param stockPriceChangedList
 	 */
-	static void performOperations(Integer optNo,List<Double> stockPriceList,List<Boolean> stockPriceChangedList) {
+	static void performOperations(Integer optNo, List<Double> stockPriceList, List<Boolean> stockPriceChangedList,
+			Scanner myObj) {
 		switch (optNo) {
 		// Case statements
 		case 1:
-			System.out.println("you selected option 1");
 			new StockComparator().displayStockPricesASCOrder(stockPriceList);
 			break;
 		case 2:
-			System.out.println("you selected option 2");
 			new StockComparator().displayStockPricesDESCOrder(stockPriceList);
 			break;
 		case 3:
-			System.out.println("you selected option 3");
 			new StockComparator().calculateNoOfCompStockRise(stockPriceChangedList);
 			break;
 		case 4:
-			System.out.println("you selected option 4");
 			new StockComparator().calculateNoOfCompStockDecline(stockPriceChangedList);
 			break;
 		case 5:
-			System.out.println("you selected option 5");
+			System.out.println("Enter the key value");
+			new StockChecker().checkStockValue(myObj, stockPriceList);
 			break;
 		case 0:
 			System.out.println("you selected option 0.you will be exited from the app");
@@ -92,7 +91,7 @@ public class StockConsole {
 
 		default:
 			System.out.println("Please select a valid option");
-			
+
 		}
 
 	}
